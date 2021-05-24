@@ -6,9 +6,11 @@ namespace Unixslayer\ComposerReplace;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
+use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\PluginInterface;
+use Unixslayer\ComposerReplace\Command\ReplaceCommand;
 
-class ComposerReplace implements PluginInterface
+class ComposerReplace implements PluginInterface, CommandProvider
 {
 
     /**
@@ -33,5 +35,12 @@ class ComposerReplace implements PluginInterface
     public function uninstall(Composer $composer, IOInterface $io)
     {
         // TODO: Implement uninstall() method.
+    }
+
+    public function getCommands(): array
+    {
+        return [
+            new ReplaceCommand(),
+        ];
     }
 }
