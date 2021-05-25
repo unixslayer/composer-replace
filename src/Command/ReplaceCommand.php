@@ -7,7 +7,6 @@ namespace Unixslayer\ComposerReplace\Command;
 use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -47,6 +46,9 @@ class ReplaceCommand extends BaseCommand
             $parameters['--'.$key] = $input->getOption($key);
         }
 
-        return new ArrayInput($parameters);
+        $definition = $this->getApplication()->getDefinition();
+        $definition->addArgument(new InputArgument('packages', InputArgument::IS_ARRAY | InputArgument::OPTIONAL, ''),);
+
+        return new ArrayInput($parameters, $definition);
     }
 }
