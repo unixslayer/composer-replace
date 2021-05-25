@@ -6,41 +6,28 @@ namespace Unixslayer\ComposerReplace;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use Composer\Plugin\Capability\CommandProvider;
+use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
+use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
-use Unixslayer\ComposerReplace\Command\ReplaceCommand;
 
-class ComposerReplace implements PluginInterface, CommandProvider
+class ComposerReplace implements PluginInterface, Capable
 {
-
-    /**
-     * @inheritDoc
-     */
-    public function activate(Composer $composer, IOInterface $io)
+    public function activate(Composer $composer, IOInterface $io): void
     {
-        // TODO: Implement activate() method.
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function deactivate(Composer $composer, IOInterface $io)
+    public function deactivate(Composer $composer, IOInterface $io): void
     {
-        // TODO: Implement deactivate() method.
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function uninstall(Composer $composer, IOInterface $io)
+    public function uninstall(Composer $composer, IOInterface $io): void
     {
-        // TODO: Implement uninstall() method.
     }
 
-    public function getCommands(): array
+    public function getCapabilities(): array
     {
         return [
-            new ReplaceCommand(),
+            CommandProviderCapability::class => CommandProvider::class,
         ];
     }
 }
